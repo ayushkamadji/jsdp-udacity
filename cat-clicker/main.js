@@ -1,20 +1,67 @@
-const CAT_NAMES = ["Agus", "Budi"]
+const CAT_NAMES = ["Apple", "Bailey", "Choco", "Drumsticks", "Eclaire", "Fritter" ]
 document.addEventListener("DOMContentLoaded", function() {
-  const catElms = document.querySelectorAll(".cat")
-  const state = {
-    cats: [{ name: CAT_NAMES[0], clicks: 0 }, { name: CAT_NAMES[1], clicks: 0 }]
-  }
+  const cats = CAT_NAMES.map( name => new Cat(name) )
+  const catsElm = document.querySelector(".cats")
+  const menuElm = document.querySelector(".menu")
+  let selectedCatElm = cats[0].dom
+  selectedCatElm.menuItemElm.classList.add("selected")
 
-  catElms.forEach((cat, index) => {
-    const nameElm = cat.querySelector(".cat-name")
-    const clickElm = cat.querySelector(".clicks")
-    const catState = state.cats[index]
-    nameElm.innerHTML = catState.name
-    clickElm.innerHTML = catState.clicks
+  catsElm.innerHTML = ""
+  catsElm.appendChild(cats[0].dom)
 
-    cat.addEventListener("click", function() {
-      catState.clicks++
-      clickElm.innerHTML = catState.clicks
+  menuElm.innerHTML = ""
+  cats.forEach( cat => {
+    menuElm.appendChild(cat.dom.menuItemElm)
+    cat.dom.menuItemElm.addEventListener("click", function() {
+      selectedCatElm.menuItemElm.classList.remove("selected")
+      catsElm.innerHTML = ""
+      catsElm.appendChild(cat.dom)
+      selectedCatElm = cat.dom
+      selectedCatElm.menuItemElm.classList.add("selected")
     })
   })
 })
+
+function Cat(name) {
+  let clicks = 0
+  this.name = name
+  this.clicks = clicks
+  this.dom = new CatDOM(this.name, this.clicks)
+  this.dom.addEventListener("click", function() { 
+    clicks++ 
+    this.updateClicks(clicks)
+  })
+
+  return this
+}
+
+function CatDOM(name, clicks) {
+  const menuELm = document.createElement("div")
+  menuELm.classList.add("cat-menu-item")
+  menuELm.appendChild(document.createTextNode(name))
+
+  const nameElm = document.createElement("div")
+  nameElm.classList.add("cat-name")
+  nameElm.appendChild(document.createTextNode(name))
+
+  const clicksElm = document.createElement("div")
+  clicksElm.classList.add("clicks")
+  clicksElm.appendChild(document.createTextNode(clicks))
+
+  const imageElm = document.createElement("img")
+  imageElm.setAttribute("src", "cat.png")
+
+  const cat = document.createElement("div")
+  cat.classList.add("cat")
+  cat.appendChild(nameElm)
+  cat.appendChild(imageElm)
+  cat.appendChild(clicksElm)
+
+  cat.updateClicks = function(value) {
+    clicksElm.innerHTML = value
+  }
+
+  cat.menuItemElm = menuELm
+
+  return cat
+}
