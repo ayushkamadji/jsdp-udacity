@@ -1,0 +1,94 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 40px;
+  box-sizing: border-box;
+  background-color: #0f0f0f;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; }
+
+.main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box; }
+
+.menu {
+  position: absolute;
+  box-sizing: border-box;
+  padding: 16px;
+  width: 200px;
+  max-height: 250px;
+  overflow: hidden;
+  overflow-y: scroll;
+  top: 20px;
+  left: 20px;
+  background-color: #ffffffa4; 
+  border: 4px solid #0022aaa4; 
+  border-radius: 8px; }
+  .menu .cat-menu-item {
+    cursor: pointer;
+    margin: 4px 0;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #ffffffa4;
+    color: #0082aaa4; }
+  .menu .cat-menu-item:hover {
+    background-color: #00000032; }
+  .menu .cat-menu-item.selected {
+    background-color: #4ada5da4; }
+
+.image {
+  box-sizing: border-box;
+  background: url("./background.jpg");
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: bottom;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 20px; }
+  .image .cats {
+    max-height: 50%;
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center;
+    align-items: center; }
+  .image .cat {
+    max-width: 200px;
+    cursor: pointer;
+    display: flex;
+    color: #0000ffa4;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+    .image .cat .cat-name {
+      font-size: 1.5em;
+      font-weight: 600; }
+    .image .cat img {
+      width: 70%; 
+    }
+    .image .cat .clicks {
+      font-size: 1.25em; 
+      font-weight: 700; }
+
+.hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+  margin: 10px;
+  padding: 12px;
+  border: 3px solid white;
+  border-radius: 8px;
+  background-color: #000000a4; }
+  .hud .field {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; }
